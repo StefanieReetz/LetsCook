@@ -38,7 +38,10 @@ public class Usuario {
         return favorites;
     }
 
-
+    public Usuario(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public Usuario(Long id, String username, String password, List<Ingredient> ingredients, List<FavoritedRecipe> favorites) {
         this.id = id;
@@ -51,4 +54,7 @@ public class Usuario {
     public Usuario() {
     }
 
+    public void setPassword(String encode) {
+
+    }
 }
