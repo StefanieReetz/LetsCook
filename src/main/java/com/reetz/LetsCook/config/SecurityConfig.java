@@ -32,8 +32,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login", "/auth/signup").permitAll() // pÃºblicas
-                        .requestMatchers( /* "/search", "/p", "/artista", */ "/favorites/**").authenticated() // precisam de token
+                        .requestMatchers("/auth/login", "/auth/signup").permitAll() // publicas
+                        .requestMatchers("/favorites/**").authenticated() // precisam de token
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

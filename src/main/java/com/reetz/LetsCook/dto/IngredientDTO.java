@@ -1,4 +1,8 @@
 package com.reetz.LetsCook.dto;
+
+
+public record IngredientDTO(Long id, String name) {
+}
 //
 //public class IngredientDTO {
 //    private Long id;
@@ -27,6 +31,3 @@ package com.reetz.LetsCook.dto;
 //        this.name = name;
 //    }
 //}
-
-public record IngredientDTO(Long id, String name) {
-}
