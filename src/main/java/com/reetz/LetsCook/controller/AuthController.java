@@ -6,12 +6,11 @@ import com.reetz.LetsCook.entity.Usuario;
 import com.reetz.LetsCook.repository.UsuarioRepository;
 import com.reetz.LetsCook.security.JwtUtil;
 import com.reetz.LetsCook.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,17 +20,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final AuthenticationManager authenticationManager;
+    private final UsuarioService usuarioService;
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
-    private JwtUtil jwtUtil;
+    public AuthController(
+            UsuarioRepository usuarioRepository,
+            AuthenticationManager authenticationManager,
+            UsuarioService usuarioService,
+            JwtUtil jwtUtil,
+            PasswordEncoder passwordEncoder
+    ) {
+        this.usuarioRepository = usuarioRepository;
+        this.authenticationManager = authenticationManager;
+        this.usuarioService = usuarioService;
+        this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody Usuario usuario) {
@@ -39,7 +46,7 @@ public class AuthController {
             return ResponseEntity.status(400).body("Nome de usuário já existe");
         }
 
-        usuario.setPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         usuarioRepository.save(usuario);
         return ResponseEntity.ok("Usuário criado com sucesso");
     }
@@ -47,17 +54,22 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
         try {
+            System.out.println("Tentando autenticar: " + authRequest.username());
+
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            authRequest.getUsername(), authRequest.getPassword()
+                            authRequest.username(), authRequest.password()
                     )
             );
 
-            UserDetails userDetails = usuarioService.loadUserByUsername(authRequest.getUsername());
-            String token = jwtUtil.gerarToken(userDetails);
+            System.out.println("Autenticado com sucesso!");
+
+            UserDetails userDetails = usuarioService.loadUserByUsername(authRequest.username());
+            String token = jwtUtil.gerarToken(userDetails.getUsername());
 
             return ResponseEntity.ok(new AuthResponse(token));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(401).body("Credenciais inválidas");
         }
     }
