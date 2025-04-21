@@ -67,7 +67,10 @@ public class AuthController {
             UserDetails userDetails = usuarioService.loadUserByUsername(authRequest.username());
             String token = jwtUtil.gerarToken(userDetails.getUsername());
 
-            return ResponseEntity.ok(new AuthResponse(token));
+            // Pega o usuário do banco
+            Usuario usuario = usuarioRepository.findByUsername(authRequest.username());
+
+            return ResponseEntity.ok(new AuthResponse(token, usuario.getId()));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(401).body("Credenciais inválidas");
