@@ -1,4 +1,6 @@
 package com.reetz.LetsCook.dto;
 
-public record CreateIngredientDTO(String name) {
-}
+public record CreateIngredientDTO(
+        String name,
+        Integer quantity
+) {}
