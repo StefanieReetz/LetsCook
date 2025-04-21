@@ -17,7 +17,7 @@ public class Usuario {
     private List<Ingredient> ingredients;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<FavoritedRecipe> favorites;
+    private List<FavoriteRecipe> favorites;
 
     public Long getId() {
         return id;
@@ -35,7 +35,7 @@ public class Usuario {
         return ingredients;
     }
 
-    public List<FavoritedRecipe> getFavorites() {
+    public List<FavoriteRecipe> getFavorites() {
         return favorites;
     }
 
@@ -44,7 +44,7 @@ public class Usuario {
         this.password = password;
     }
 
-    public Usuario(Long id, String username, String password, List<Ingredient> ingredients, List<FavoritedRecipe> favorites) {
+    public Usuario(Long id, String username, String password, List<Ingredient> ingredients, List<FavoriteRecipe> favorites) {
         this.id = id;
         this.username = username;
         this.password = password;

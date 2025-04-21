@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,6 +54,29 @@ public class SpoonacularService {
             return List.of();
         }
     }
+
+
+    public SpoonacularRecipeDetails buscarDetalhes(Long recipeId) {
+        try {
+            String url = "https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey=" + apiKey;
+
+            ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
+            Map body = response.getBody();
+
+            if (body == null) return null;
+
+            Long id = ((Number) body.get("id")).longValue();
+            String title = (String) body.get("title");
+            String image = (String) body.get("image");
+
+            return new SpoonacularRecipeDetails(id, title, image);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
     // Classes auxiliares para representar as instruções
     public static class InstructionBlock {

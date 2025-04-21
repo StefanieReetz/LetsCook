@@ -15,8 +15,6 @@ public class SpoonacularRecipe {
         return id;
     }
 
-
-
     public String getTitle() {
         return title;
     }
