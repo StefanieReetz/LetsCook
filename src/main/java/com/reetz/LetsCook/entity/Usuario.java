@@ -12,6 +12,7 @@ public class Usuario {
 
     private String username;
     private String password;
+
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Ingredient> ingredients;
 

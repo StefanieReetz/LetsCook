@@ -27,3 +27,19 @@ public class UsuarioService implements UserDetailsService {
                 .build();
     }
 }
+/*
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if (usuario == null) {
+            throw new UsernameNotFoundException("Usuário não encontrado");
+        }
+        return User.builder()
+                .username(usuario.getUsername())
+                .password(usuario.getPassword())
+                .roles("USER")
+                .build();
+    }
+}
+ */
