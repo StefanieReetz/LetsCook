@@ -238,7 +238,7 @@ PUT http://localhost:8080/ingredients/{id}
 ---
 #### Excluir ingredientes
 ```http
-DELETE http://localhost:8080/ingredients/id
+DELETE http://localhost:8080/ingredients/{id}
 ```
 | Parâmetro   | Tipo   | Descrição                                     |
 | :---------- |:-------|:----------------------------------------------|
@@ -246,7 +246,7 @@ DELETE http://localhost:8080/ingredients/id
 
 ##### Exemplo de requisição:
 ```http
-  PUT http://localhost:8080/ingredients/1
+  DELETE http://localhost:8080/ingredients/1
 ```
 
 </details>
