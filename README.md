@@ -8,27 +8,24 @@
 
 ## :door: Conteúdo
 
-- [Sobre](#💡-sobre-o-projeto)
-- [Funcionalidades](#✨-funcionalidades)
-- [Tecnologias](#🛠️-tecnologias-utilizadas)
-- [Como executar o projeto](#▶️-como-executar)
-- [Variáveis de Ambiente](#⚙️-variáveis-de-ambiente)
-- [Autenticação](#🔐-autenticação-jwt)
-- [Endpoints](#pushpin-endpoints)
-- [Insomnia Collection](#🔗-insomnia-collection)
+- [Sobre](#Sobre)
+- [Funcionalidades](#Funcionalidades)
+- [Tecnologias](#Tecnologias)
+- [Como executar o projeto](#executar)
+- [Variáveis de Ambiente](#variaveis-de-ambiente)
+- [Endpoints](#Endpoints)
 
 ---
 
+<a name="Sobre"></a>
 ## 💡 Sobre o projeto
 
-A ideia surgiu da vontade de criar algo útil, bonito e diferente: uma API onde o usuário informa os ingredientes que tem e recebe sugestões de receitas que pode preparar com o que já possui.
+A **LetsCook API** é uma API responsável por sugerir receitas com base nos ingredientes que o usuário tem em casa. Ela se conecta com a [API Spoonacular](https://spoonacular.com/), consome os dados de receitas e retorna sugestões de pratos que podem ser preparados com os ingredientes disponíveis.
 
-Além disso, é possível favoritar receitas e ver os ingredientes que ainda faltam para completar alguma.
-
-> Um projeto feito com foco no aprendizado de autenticação, consumo de API externa, e organização de uma API REST com boas práticas.
+Além disso, também permite favoritar receitas e visualizar quais ingredientes ainda estão faltando para prepará-las. Para acessar a maioria das funcionalidades, é necessário estar autenticado.
 
 ---
-
+<a name="Funcionalidades"></a>
 ## ✨ Funcionalidades
 
 - 🔐 Autenticação via JWT
@@ -40,6 +37,7 @@ Além disso, é possível favoritar receitas e ver os ingredientes que ainda fal
 
 ---
 
+<a name="Tecnologias"></a>
 ## 🛠️ Tecnologias Utilizadas
 
 - Java 17  
@@ -53,6 +51,7 @@ Além disso, é possível favoritar receitas e ver os ingredientes que ainda fal
 
 ---
 
+<a name="executar"></a>
 ## ▶️ Como executar
 
 ### Pré-requisitos
@@ -60,11 +59,92 @@ Além disso, é possível favoritar receitas e ver os ingredientes que ainda fal
 - Java 17+
 - Maven
 - PostgreSQL rodando
-- IDE de sua preferência
 
 ### Rodando a aplicação
 
 ```bash
-git clone https://github.com/seu-usuario-aqui/lets-cook.git
-cd lets-cook
+git clone https://github.com/StefanieReetz/LetsCook.git
+cd LetsCook
 ./mvnw spring-boot:run
+```
+---
+
+<a name="variaveis-de-ambiente"></a>
+## ⚙️ Variáveis de Ambiente
+
+#### Para executar o projeto corretamente, é necessário configurar as seguintes variáveis de ambiente:
+<details>
+
+<summary><strong>🗂️ Banco de Dados</strong></summary>
+
+| Variável | Descrição |
+|---------|-----------|
+| `DB_USER` | Usuário do banco de dados PostgreSQL |
+| `DB_PASSWORD` | Senha do banco de dados PostgreSQL |
+</details>
+
+<details><summary><strong>🔐 JWT</strong></summary>
+
+| Variável | Descrição |
+|---------|-----------|
+| `JWT_SECRET` | Chave secreta usada para assinar e verificar os tokens JWT. Pode ser qualquer string segura. |
+</details>
+
+<details>
+<summary><strong>🍅 Integração com o Spoonacular</strong></summary> 
+
+| Variável | Descrição                                                                              |
+|---------|----------------------------------------------------------------------------------------|
+| `SPOONCULAR_API_KEY` | API Key do spoonacular ([Spotify Developer](https://spoonacular.com/food-api/pricing)) |
+</details>
+
+
+<a name="Endpoints"></a>
+## Endpoints
+
+<details>
+<summary><strong>🔒 Autenticação</strong></summary>
+
+### 🔐 Endpoints de Autenticação
+
+Para acessar os endpoints protegidos da API LetsCook, é necessário estar autenticado. Você pode criar uma conta e depois fazer login para receber o token JWT.
+### 📝 Cadastrar
+```http
+POST http://localhost:8080/auth/signup
+```
+#### Corpo da requisição:
+```json
+{
+  "username": "usuario",
+  "password": "senha123"
+}
+```
+
+
+---
+### 🔑 Login
+```http
+POST http://localhost:8080/auth/login
+```
+
+#### Corpo da requisição:
+``` json
+{
+  "username": "usuario",
+  "password": "senha123"
+}
+```
+
+#### Exemplo de resposta:
+```json
+{
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+#### Use esse token no cabeçalho Authorization de todas as requisições protegidas:
+```makefile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+</details>
+---
