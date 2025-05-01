@@ -100,34 +100,46 @@ cd LetsCook
 
 
 <a name="Endpoints"></a>
-## Endpoints
-
+## 📎 Endpoints
 <details>
-<summary><strong>🔒 Autenticação</strong></summary>
-
-### 🔐 Endpoints de Autenticação
+    <summary>
+        <strong>Autenticação</strong>
+    </summary>
 
 Para acessar os endpoints protegidos da API LetsCook, é necessário estar autenticado. Você pode criar uma conta e depois fazer login para receber o token JWT.
-### 📝 Cadastrar
+#### 📝 Cadastra um usuario
 ```http
 POST http://localhost:8080/auth/signup
 ```
-#### Corpo da requisição:
+
+##### Corpo da requisição:
+| Chave      | Tipo       | Descrição                         |
+|:-----------| :--------- |:----------------------------------|
+| `username`     | `string` | **Obrigatório**. Nome do usuário  |
+| `password` | `string` | **Obrigatório**. Senha do usuário |
+
+
+##### Exemplo de criação de um usuário
 ```json
 {
   "username": "usuario",
   "password": "senha123"
 }
 ```
-
-
 ---
 ### 🔑 Login
 ```http
 POST http://localhost:8080/auth/login
 ```
 
-#### Corpo da requisição:
+##### Corpo da requisição:
+| Chave      | Tipo       | Descrição                         |
+|:-----------| :--------- |:----------------------------------|
+| `username`     | `string` | **Obrigatório**. Nome do usuário  |
+| `password` | `string` | **Obrigatório**. Senha do usuário |
+
+
+#### Exemplo de login em um usuário:
 ``` json
 {
   "username": "usuario",
@@ -142,8 +154,99 @@ POST http://localhost:8080/auth/login
 }
 ```
 
-#### Use esse token no cabeçalho Authorization de todas as requisições protegidas:
+ Use esse token no cabeçalho Authorization de todas as requisições protegidas:
 ```makefile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
+</details>
+
+<details>
+    <summary>
+        <strong>🍎 Ingredientes</strong>
+    </summary>
+
+#### Listar ingredientes
+Você conseguirá ver os ingredientes do usuário cadastrado
+```http
+GET http://localhost:8080/ingredients
+```
+---
+#### Adiciona um ingrediente ao usuário cadastrado
+```http
+POST http://localhost:8080/ingredients
+```
+
+##### Corpo da requisição:
+| Chave      | Tipo       | Descrição                                        |
+|:-----------| :--------- |:-------------------------------------------------|
+| `name`     | `string` | **Obrigatório**. Nome do ingrediente (em ingles) |
+| `quantity` | `Integer` | **Obrigatório**. Quantidade de ingredientes      |
+
+
+##### Exemplo de requisição:
+```json
+{
+  "name" : "Strawberry",
+  "quantity" : "9"
+}
+```
+##### Exemplo de resposta:
+```json
+{
+  "id": 1,
+  "name": "Strawberry",
+  "quantity": 9
+}
+```
+---
+
+#### Atualiza ingredientes pelo Id
+```http
+POST http://localhost:8080/ingredients/{id}
+```
+| Parâmetro   | Tipo   | Descrição                                     |
+| :---------- |:-------|:----------------------------------------------|
+| `id` | `Long` | **Obrigatório**. Identificação do ingrediente |
+
+##### Exemplo de requisição:
+```http
+  PUT http://localhost:8080/ingredients/1
+```
+
+##### Corpo da requisição:
+| Chave      | Tipo       | Descrição                                        |
+|:-----------| :--------- |:-------------------------------------------------|
+| `name`     | `string` | **Obrigatório**. Nome do ingrediente (em inglês) |
+| `quantity` | `Integer` | **Obrigatório**. Quantidade de ingredientes      |
+
+
+##### Exemplo de requisição:
+```json
+{
+  "name" : "Onion",
+  "quantity" : "5"
+}
+```
+##### Exemplo de resposta:
+```json
+{
+  "id": 1,
+  "name": "Onion",
+  "quantity": 5
+}
+```
+---
+#### Excluir ingredientes
+```http
+DELETE http://localhost:8080/ingredients/id
+```
+| Parâmetro   | Tipo   | Descrição                                     |
+| :---------- |:-------|:----------------------------------------------|
+| `id` | `Long` | **Obrigatório**. Identificação do ingrediente |
+
+##### Exemplo de requisição:
+```http
+  PUT http://localhost:8080/ingredients/1
+```
+
 </details>
