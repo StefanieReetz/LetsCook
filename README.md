@@ -202,7 +202,7 @@ POST http://localhost:8080/ingredients
 
 #### Atualiza ingredientes pelo Id
 ```http
-POST http://localhost:8080/ingredients/{id}
+PUT http://localhost:8080/ingredients/{id}
 ```
 | Parâmetro   | Tipo   | Descrição                                     |
 | :---------- |:-------|:----------------------------------------------|
