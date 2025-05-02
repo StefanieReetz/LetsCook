@@ -75,7 +75,7 @@ cd LetsCook
 #### Para executar o projeto corretamente, é necessário configurar as seguintes variáveis de ambiente:
 <details>
 
-<summary><strong>🗂️ Banco de Dados</strong></summary>
+<summary><strong>:: Banco de Dados</strong></summary>
 
 | Variável | Descrição |
 |---------|-----------|
@@ -83,7 +83,7 @@ cd LetsCook
 | `DB_PASSWORD` | Senha do banco de dados PostgreSQL |
 </details>
 
-<details><summary><strong>🔐 JWT</strong></summary>
+<details><summary><strong>:closed_lock_with_key: JWT</strong></summary>
 
 | Variável | Descrição |
 |---------|-----------|
@@ -91,7 +91,7 @@ cd LetsCook
 </details>
 
 <details>
-<summary><strong>🍅 Integração com o Spoonacular</strong></summary> 
+<summary><strong>:tomato: Integração com o Spoonacular</strong></summary> 
 
 | Variável | Descrição                                                                              |
 |---------|----------------------------------------------------------------------------------------|
@@ -127,7 +127,7 @@ POST http://localhost:8080/auth/signup
 }
 ```
 ---
-### 🔑 Login
+### :key: Login
 ```http
 POST http://localhost:8080/auth/login
 ```
@@ -162,7 +162,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 <details>
     <summary>
-        <strong>🍎 Ingredientes</strong>
+        <strong>:apple: Ingredientes</strong>
     </summary>
 
 #### Listar ingredientes
@@ -249,4 +249,17 @@ DELETE http://localhost:8080/ingredients/{id}
   DELETE http://localhost:8080/ingredients/1
 ```
 
+</details>
+
+<details>
+    <summary>
+    <strong>:pie: Receitas</strong>
+  </summary>
+
+#### Listar receitas 
+Você conseguirá ver as receitas que o seu usuario cadastrado consegue fazer com seus ingredientes
+```http
+GET http://localhost:8080/recipes/user
+```
+    
 </details>
