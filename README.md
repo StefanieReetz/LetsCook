@@ -75,7 +75,7 @@ cd LetsCook
 #### Para executar o projeto corretamente, é necessário configurar as seguintes variáveis de ambiente:
 <details>
 
-<summary><strong>:: Banco de Dados</strong></summary>
+<summary><strong>:card_index_dividers: Banco de Dados</strong></summary>
 
 | Variável | Descrição |
 |---------|-----------|
@@ -95,7 +95,7 @@ cd LetsCook
 
 | Variável | Descrição                                                                              |
 |---------|----------------------------------------------------------------------------------------|
-| `SPOONCULAR_API_KEY` | API Key do spoonacular ([Spotify Developer](https://spoonacular.com/food-api/pricing)) |
+| `SPOONCULAR_API_KEY` | API Key do spoonacular ([Spoonacular Pricing](https://spoonacular.com/food-api/pricing)) |
 </details>
 
 
@@ -103,11 +103,11 @@ cd LetsCook
 ## 📎 Endpoints
 <details>
     <summary>
-        <strong>Autenticação</strong>
+        <strong>:lock:Autenticação</strong>
     </summary>
 
 Para acessar os endpoints protegidos da API LetsCook, é necessário estar autenticado. Você pode criar uma conta e depois fazer login para receber o token JWT.
-#### 📝 Cadastra um usuario
+#### :pencil: Cadastra um usuario
 ```http
 POST http://localhost:8080/auth/signup
 ```
