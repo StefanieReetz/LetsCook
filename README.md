@@ -263,3 +263,58 @@ GET http://localhost:8080/recipes/user
 ```
     
 </details>
+
+<details>
+    <summary>
+    <strong> :star: Favoritar Receitas</strong>
+  </summary>
+
+#### Listar receitas favoritadas
+Você conseguirá ver as receitas que o seu usuario cadastrado favoritou
+```http
+GET http://localhost:8080/favorites
+```
+##### Exemplo de resposta:
+```json
+[
+	{
+		"id": 1,
+		"recipeId": 645555,
+		"title": "Green Tomato Salad",
+		"image": "https://img.spoonacular.com/recipes/645555-556x370.jpg"
+	}
+]
+```
+---
+#### Favorita uma Receita
+```http
+POST http://localhost:8080/favorites
+```
+
+##### Corpo da requisição:
+| Chave      | Tipo       | Descrição                                        |
+|:-----------| :--------- |:-------------------------------------------------|
+| `recipeId`     | `Long` | **Obrigatório**. Identificação da receita (Id externo) |
+
+##### Exemplo de requisição:
+```json
+{
+	"recipeId" : 645555
+}
+```
+---
+
+#### Excluir ingredientes
+```http
+DELETE http://localhost:8080/favorites/{recipeId}
+```
+| Parâmetro   | Tipo   | Descrição                                     |
+| :---------- |:-------|:----------------------------------------------|
+| `recipeId` | `Long` | **Obrigatório**. Identificação da receita (Id externo) |
+
+##### Exemplo de requisição:
+```http
+  DELETE http://localhost:8080/favorites/645555
+```
+    
+</details>
