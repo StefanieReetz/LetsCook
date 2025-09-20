@@ -43,7 +43,7 @@ public class FavoriteRecipeService {
             return; // Se já foi favoritada, não faz nada
         }
 
-        // 🧠 Buscar da Spoonacular API
+        // Buscar da Spoonacular API
         SpoonacularRecipeDetails detalhes = spoonacularService.buscarDetalhes(recipeExternalId);
 
         if (detalhes == null) {
