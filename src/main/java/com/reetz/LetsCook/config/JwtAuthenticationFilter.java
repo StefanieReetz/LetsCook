@@ -30,7 +30,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("ENTROU NO FILTRO");
         String authorizationHeader = request.getHeader("Authorization");
         System.out.println("Autorização recebida: " + authorizationHeader);
 

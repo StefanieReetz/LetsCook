@@ -36,7 +36,6 @@ public class JwtUtil {
             DecodedJWT jwt = JWT.require(algorithm)
                     .build()
                     .verify(token);
-
             return jwt.getExpiresAt().after(new Date());
         } catch (Exception e) {
             return false;
